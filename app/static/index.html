@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PDF QA Chat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        #answer { white-space: pre-wrap; margin-top: 20px; background: #f0f0f0; padding: 15px; border-radius: 5px; }
+        input[type="text"] { width: 400px; padding: 8px; }
+        button { padding: 8px 15px; }
+    </style>
+</head>
+<body>
+    <h2>Ask a question about the PDF</h2>
+    <input type="text" id="questionInput" placeholder="Type your question here" />
+    <button onclick="askQuestion()">Ask</button>
+
+    <div id="answer"></div>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById("questionInput").value.trim();
+            if (!question) {
+                alert("Please enter a question.");
+                return;
+            }
+
+            document.getElementById("answer").innerText = "Loading...";
+
+            try {
+                const response = await fetch("/ask", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question })
+                });
+
+                if (!response.ok) {
+                    const err = await response.json();
+                    document.getElementById("answer").innerText = "Error: " + (err.detail || "Unknown error");
+                    return;
+                }
+
+                const data = await response.json();
+                document.getElementById("answer").innerText = data.answer;
+            } catch (error) {
+                document.getElementById("answer").innerText = "Fetch error: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

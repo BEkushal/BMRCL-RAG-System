@@ -14,5 +14,16 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system using:
 1. **Clone the repo**
 
 ```bash
-git clone <repo_url>
+git clone https://github.com/BEkushal/BMRCL-RAG-System.git
 cd rag-system
+```
+
+2. **Install dependencies** (preferably in a venv):  
+```bash
+pip install -r requirements.txt
+```
+
+3. **Run the app:**  
+```bash
+uvicorn app.main:app --reload
+```

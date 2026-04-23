@@ -15,7 +15,7 @@ This project implements a **Retrieval-Augmented Generation (RAG)** system using:
 
 ```bash
 git clone https://github.com/BEkushal/BMRCL-RAG-System.git
-cd rag-system
+cd Assignment_Aarav_Solutions
 ```
 
 2. **Install dependencies** (preferably in a venv):  
